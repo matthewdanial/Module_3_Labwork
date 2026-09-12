@@ -4,7 +4,7 @@ function makeCounter() {
     return function() {
         currentCount++;
         console.log(currentCount);
-        return currentCount
+        return currentCount;
     };
 }
 
@@ -15,15 +15,14 @@ counter1();
 //a)
 let counter2 = makeCounter();     
 
-console.log('--- part a ---');
-counter2(); // 1  
-counter2(); // 2
-counter1(); // 3 
+counter2();  
+counter2(); 
+counter1();  
 
 //b)
 
 function makeCounterFrom(startFrom) {
-    let currentCount = startFrom;  // startFrom is also part of the outer environment
+    let currentCount = startFrom;  
     return function() {
         currentCount++;
         console.log(currentCount);
@@ -31,15 +30,14 @@ function makeCounterFrom(startFrom) {
     };
 }
 
-console.log('--- part b ---');
 let counter3 = makeCounterFrom(10);
-counter3(); // 11  - increments before logging, same order as the original
-counter3(); // 12
+counter3(); 
+counter3(); 
 
 // c) 
 
 function makeCounterBy(startFrom, incrementBy) {
-    let currentCount = startFrom;  // both parameters are read by the one closure
+    let currentCount = startFrom;  
     return function() {
         currentCount += incrementBy;
         console.log(currentCount);
@@ -47,11 +45,10 @@ function makeCounterBy(startFrom, incrementBy) {
     };
 }
 
-console.log('--- part c ---');
 let counter4 = makeCounterBy(10, 5);
-counter4(); // 15
-counter4(); // 20
+counter4();
+counter4();
 
-let counter5 = makeCounterBy(0, 1);  // reproduces the original makeCounter
-counter5(); // 1
-counter5(); // 2
+let counter5 = makeCounterBy(0, 1);  
+counter5(); 
+counter5();

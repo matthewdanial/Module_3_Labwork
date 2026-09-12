@@ -1,10 +1,9 @@
-
 /*
 The four tests print in this order:#4, #3, #2, #1
 
 #4 prints first due to it being synchronous call, not a timer.
-All synchronous code runs to empletion before any schedules callback fires.
-#1, #2, #3 are asynchronous code, becasue setTimeout is an asynchronous function 
+All synchronous code runs to completion before any scheduled callback fires.
+#1, #2, #3 are asynchronous code, because setTimeout is an asynchronous function 
 (It does not pause during the delay period). Instead each delayed function is put on a timer,
 and other synchronous code still executes until each timer expires and the delayed function executes.
 So the three delayed functions are executed in order of their delay not the order they were written
@@ -25,13 +24,10 @@ setTimeout(delayMsg, 20, '#2: Delayed by 20ms');     // asynchronous code with 2
 setTimeout(delayMsg, 0, '#3: Delayed by 0ms');       // asynchronous code with no delay
 delayMsg('#4: Not delayed at all');                  // standard synchronous code
 
-// c) fifth test with a large delay
-// function to be executed, then milliseconds to delay, then arguments for function
-// timerId is a unique reference to this timer, so that it can be cancelled
+// c) 
 let timerId = setTimeout(delayMsg, 15000, '#5: Delayed by 15 seconds');
 
-// d) clearTimeout cancels the timer, using the identifier returned by setTimeout.
-// This delays execution and then cancels during the delay, so #5 never prints.
+//d)
 clearTimeout(timerId);
 console.log('#5 was cancelled before its 15 second delay elapsed');
 

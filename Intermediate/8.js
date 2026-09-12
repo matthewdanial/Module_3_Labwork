@@ -12,7 +12,7 @@ const phoneBookDEF = new Map([
 console.log(phoneBookDEF);
 
 //c)
-phoneBookABC.set('Carloine', '0455999888')
+phoneBookABC.set('Caroline', '0455999888')
 console.log(phoneBookABC.get('Caroline'));
 console.log(phoneBookABC.size);
 

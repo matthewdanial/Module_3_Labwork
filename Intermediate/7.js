@@ -13,24 +13,24 @@ function getBookTitle(bookId) {
     return book ? book.title : 'Book not found';
 }
 
-// b) Return all books written before 1950
+// b) 
 function getOldBooks() {
     return books.filter(book => book.year < 1950);
 }
 
-// c) Add a genre property of 'classic' to all books
+// c) 
 function addGenre() {
     return books.map(book => ({ ...book, genre: 'classic' }));
 }
 
-// d) Return the titles of books whose author starts with a given letter
+// d) 
 function getTitles(authorInitial) {
     return books
         .filter(book => book.author.toLowerCase().startsWith(authorInitial.toLowerCase()))
         .map(book => book.title);
 }
 
-// e) Return the book with the most recent publication year
+// e) 
 function latestBook() {
     let latestYear = 0;
     books.forEach(book => {

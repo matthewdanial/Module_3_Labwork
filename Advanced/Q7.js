@@ -1,4 +1,3 @@
-// Module 3 Advanced JavaScript - Q7 (clock classes)
 
 class DigitalClock {
     constructor(prefix) {
@@ -24,65 +23,61 @@ class DigitalClock {
 }
 
 
-// a) PrecisionClock - adds a precision parameter, the ms between ticks
+// a)
 class PrecisionClock extends DigitalClock {
-    constructor(prefix, precision = 1000) {   // defaults to 1 second if not supplied
-        super(prefix);                        // call the constructor of the parent class
-        this.precision = precision;           // custom property only for PrecisionClock
+    precision = 1000;
+
+    constructor(prefix, precision) {
+        super(prefix);
+        if (precision) this.precision = precision;
     }
-    start() {                                 // overrides start in the parent class
+    start() {
         this.display();
-        // same as the parent, but uses this.precision instead of a hardcoded 1000
         this.timer = setInterval(() => this.display(), this.precision);
     }
 }
 
 
-// b) AlarmClock - adds a wakeupTime in hh:mm format
+// b)
 class AlarmClock extends DigitalClock {
-    constructor(prefix, wakeupTime = '07:00') {   // defaults to 07:00 if not supplied
+    wakeupHours = 7;
+    wakeupMins = 0;
+
+    constructor(prefix, wakeupTime) {
         super(prefix);
-        this.wakeupTime = wakeupTime;
+        if (wakeupTime) {
+            let [hours, mins] = wakeupTime.split(':');
+            this.wakeupHours = Number(hours);
+            this.wakeupMins = Number(mins);
+        }
     }
-    display() {                               // overrides display in the parent class
-        super.display();                      // call parent display to print the time
+    display() {
+        super.display();
 
         let date = new Date();
-        let [hours, mins] = [date.getHours(), date.getMinutes()];
-        if (hours < 10) hours = '0' + hours;
-        if (mins < 10) mins = '0' + mins;
-
-        if (`${hours}:${mins}` === this.wakeupTime) {
+        if (date.getHours() === this.wakeupHours && date.getMinutes() === this.wakeupMins) {
             console.log(`${this.prefix} Wake Up!`);
-            this.stop();                      // inherited from DigitalClock
+            this.stop();
         }
     }
 }
 
 
-// ----- tests -----
-
 const myClock = new DigitalClock('my clock:');
 myClock.start();
-setTimeout(() => myClock.stop(), 5000);       // stop after 5s so the file can finish
+setTimeout(() => myClock.stop(), 5000);
 
-const fastClock = new PrecisionClock('fast clock:', 250);   // ticks 4 times a second
+const fastClock = new PrecisionClock('fast clock:', 250);
 fastClock.start();
 setTimeout(() => fastClock.stop(), 3000);
 
-const defaultClock = new PrecisionClock('default clock:');  // no precision supplied - 1000ms
+const defaultClock = new PrecisionClock('default clock:');
 defaultClock.start();
 setTimeout(() => defaultClock.stop(), 4000);
 
-// an alarm set for 07:00 would take too long to test, so this one is set for the
-// start of the next minute - it stops itself when it gets there
-let soon = new Date(Date.now() + 60 * 1000);
-let [h, m] = [soon.getHours(), soon.getMinutes()];
-if (h < 10) h = '0' + h;
-if (m < 10) m = '0' + m;
-
-const alarm = new AlarmClock('alarm clock:', `${h}:${m}`);
+const alarm = new AlarmClock('alarm clock:', '07:00');
 alarm.start();
+setTimeout(() => alarm.stop(), 5000);
 
-const defaultAlarm = new AlarmClock('07:00 alarm:');        // no wakeupTime supplied
-console.log('defaultAlarm wakeupTime is ' + defaultAlarm.wakeupTime);
+const defaultAlarm = new AlarmClock('07:00 alarm:');
+console.log('defaultAlarm wakeupHours is ' + defaultAlarm.wakeupHours);

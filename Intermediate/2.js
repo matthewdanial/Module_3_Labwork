@@ -14,10 +14,9 @@ function truncate2(str, max) {
 }
 
 //Tests
-console.log(truncate1('This text will be truncated if it is too long', 20)); // This text will be trunc...
+console.log(truncate1('This text will be truncated if it is too long', 20)); // This text will be tr...
 console.log(truncate1('Short text', 20)); // Short text
-console.log(truncate1('Exectly twenty five chars', 25)); // Exectly twenty five chars
+console.log(truncate1('Exactly twenty five chars', 25)); // Exactly twenty five chars
 
-console.log(truncate2('This text will be truncated if it is too long', 20)); // This text will be trunc...
+console.log(truncate2('This text will be truncated if it is too long', 20)); // This text will be tr...
 console.log(truncate2('Short text', 20)); // Short text
-
